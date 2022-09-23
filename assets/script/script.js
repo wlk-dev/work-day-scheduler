@@ -32,7 +32,7 @@ function styleRow ( rowElement, momentObj ) {
     if ( now.isSame( momentObj, "hour" ) ) {
         children.addClass("bg-success text-white");
     } else if ( momentObj.isBefore( now, "hour" ) ) {
-        children.addClass("bg-danger text-white opacity-50");
+        children.addClass("bg-danger text-white opacity-75");
     } else {
         children.addClass("bg-dark text-white");
     }
@@ -41,11 +41,10 @@ function styleRow ( rowElement, momentObj ) {
 }
 
 function generateRow( rowData ) {
-
     var parentRow =  $(`<div class="row is-listener" id="${rowData.id}">`);
 
     var timeEntry = $('<div class="shadow-lg column col-2 col-xl-1">').text(rowData.timeKey);
-    var eventInput = $('<input type="text" class="column col-8 col-xl-9">');
+    var eventInput = $('<input type="text" class="column col-8 col-xl-9">').val(rowData.event);
     var saveEventBtn = $('<button class="column col-2 col-xl-2 shadow-lg">').text("+");
 
     
@@ -89,7 +88,10 @@ function main () {
 
         storeEvent( eventValue, timeKey );
     })
-    // col-2 col-8 col-2
 }
 
 main();
+var timeInterval = setInterval( function () {
+    $("#events-list").empty();
+    main();
+}, 60_000 )

@@ -1,5 +1,9 @@
 .column {
-    border: 1px solid black;
+    border: 2px solid black;
     margin-top: .2%;
     padding: 2% 1%;
+}
+
+.opacity-75 {
+    opacity: 0.75;
 }
