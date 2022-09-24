@@ -12,7 +12,7 @@ function getStoredEvents () {
 function setDate () {
     const date = new Date();
     $("#currentDay").text( Intl.DateTimeFormat("en-US", {dateStyle: "full"} ).format(date) );
-    localStorage.setItem("current-date", JSON.stringify( moment() ) )
+    // localStorage.setItem("current-date", JSON.stringify( moment() ) )
 }
 
 function getMoments () {
@@ -56,17 +56,9 @@ function generateRow( rowData ) {
 
 function initSchedule ( events, moments) {
     var eventsList = $("#events-list");
-    if ( !jQuery.isEmptyObject( events ) ) {
-        for ( const idx in moments ) {
-            var key = moments[idx].format("ha");
-            eventsList.append( generateRow( { timeObj:moments[idx] , timeKey:key, event:events[key], id:String(`${key}-time`) } ) )
-        }
-    } else {
-        var newEvents = {};
-        for ( const idx in moments ) {
-            newEvents[ moments[idx].format("ha") ] = "";
-        }
-        localStorage.setItem("stored-events", JSON.stringify(newEvents));
+    for ( const idx in moments ) {
+        var key = moments[idx].format("ha");
+        eventsList.append( generateRow( { timeObj:moments[idx] , timeKey:key, event:events[key], id:String(`${key}-time`) } ) )
     }
 }
 
