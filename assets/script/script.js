@@ -1,10 +1,12 @@
 function getStoredEvents () {
-    var currentDay = moment( JSON.parse(localStorage.getItem("current-date")) ) || moment();
-    if ( currentDay.isSame( moment(), "day" ) ) {
-        return JSON.parse( localStorage.getItem("stored-events") ) || {};
-    } else {
-        return {};
-    }
+    return JSON.parse( localStorage.getItem("stored-events") ) || {};
+    
+    // var currentDay = moment( JSON.parse(localStorage.getItem("current-date")) ) || moment();
+    // if ( currentDay.isSame( moment(), "day" ) ) {
+    //     return JSON.parse( localStorage.getItem("stored-events") ) || {};
+    // } else {
+    //     return {};
+    // }
 }
 
 function setDate () {
