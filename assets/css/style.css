@@ -1,9 +1,37 @@
 .column {
-    border: 2px solid black;
+    border: 1px solid black;
     margin-top: .2%;
     padding: 2% 1%;
 }
 
-.opacity-75 {
-    opacity: 0.75;
+.opacity-70 {
+    opacity: 0.70;
 }
+
+button.my-effects, div.my-effects {
+    background-color: black !important;
+    transition: 0.5s;
+}
+
+button.my-effects:active {
+    color: green !important;
+    transform: scale(.6);
+}
+
+button.my-effects:focus {
+    background-color: black !important;
+}
+
+button.my-effects:hover {
+    color: black !important;
+    background-color: white !important;
+}
+
+div.my-effects:hover {
+    transform: scale(1.1);
+}
+
+div.my-effects:active {
+    background-color: red !important;
+}
+

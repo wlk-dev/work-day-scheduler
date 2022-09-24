@@ -30,23 +30,20 @@ function styleRow ( rowElement, momentObj ) {
     var now = moment();
 
     if ( now.isSame( momentObj, "hour" ) ) {
-        children.addClass("bg-success text-white");
+        children.addClass("my-effects bg-warning text-white");
     } else if ( momentObj.isBefore( now, "hour" ) ) {
-        children.addClass("bg-danger text-white opacity-75");
+        children.addClass("my-effects bg-danger text-white opacity-70");
     } else {
-        children.addClass("bg-dark text-white");
+        children.addClass("my-effects bg-primary text-white");
     }
-
-
 }
 
 function generateRow( rowData ) {
     var parentRow =  $(`<div class="row is-listener" id="${rowData.id}">`);
 
-    var timeEntry = $('<div class="shadow-lg column col-2 col-xl-1">').text(rowData.timeKey);
+    var timeEntry = $('<div class="time-slot shadow-lg column col-2 col-xl-1">').text(rowData.timeKey);
     var eventInput = $('<input type="text" class="column col-8 col-xl-9">').val(rowData.event);
     var saveEventBtn = $('<button class="column col-2 col-xl-2 shadow-lg">').text("+");
-
     
     parentRow.append( [timeEntry, eventInput, saveEventBtn] )
     
@@ -81,12 +78,21 @@ function main () {
     setDate();
     initSchedule( getStoredEvents(), getMoments() );
 
-    $(".is-listener").on("click", "button", function () {
-        var elem = $(this).parent().children()
-        var eventValue = elem.eq(1).val();
-        var timeKey = elem.eq(0).text()
+    $(".is-listener").on("click", function (evt) {
+        if ( evt.target.matches("button") ) {
+            var elem = $(this).children()
+            var eventValue = elem.eq(1).val();
+            var timeKey = elem.eq(0).text()
 
-        storeEvent( eventValue, timeKey );
+            storeEvent( eventValue, timeKey );
+        } else if ( evt.target.matches(".time-slot") ) {
+            var elem = $(this).children()
+            var eventValue = elem.eq(1).val("");
+            var timeKey = elem.eq(0).text()
+
+            storeEvent( "", timeKey );
+        }
+
     })
 }
 
@@ -94,4 +100,4 @@ main();
 var timeInterval = setInterval( function () {
     $("#events-list").empty();
     main();
-}, 60_000 )
+}, 60_000 );
